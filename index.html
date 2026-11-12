@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Roadmap Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">B</span><div><strong>BuildPath</strong><small>Learning workspace</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav>
+        <a class="nav-item active" href="#overview"><span>▦</span> Overview</a>
+        <a class="nav-item" href="#roadmap"><span>⌁</span> My roadmap</a>
+        <a class="nav-item" href="#study"><span>◷</span> Study log</a>
+      </nav>
+      <div class="sidebar-note"><span class="note-icon">✦</span><strong>Small steps count.</strong><p>Keep showing up. Your future systems are built one focused session at a time.</p></div>
+      <div class="profile"><div class="avatar">Y</div><div><strong>My learning</strong><small>Personal workspace</small></div><span class="dots">•••</span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><div class="eyebrow">YOUR LEARNING SPACE</div><h1>Backend development</h1><p>Six months. One reusable core. Two real systems.</p></div>
+        <div class="top-actions"><span class="save-status" id="saveStatus">● Saved in this browser</span><button class="ghost-btn" id="exportBtn">Export progress</button></div>
+      </header>
+
+      <section class="hero-grid" id="overview">
+        <article class="progress-card">
+          <div class="card-top"><div><span class="eyebrow">ROADMAP COMPLETION</span><h2 id="overallPercent">0%</h2></div><span class="target-chip">6-month plan</span></div>
+          <div class="progress-track large"><div id="overallBar"></div></div>
+          <div class="stat-row">
+            <div><strong id="doneCount">0</strong><span>Tasks completed</span></div>
+            <div><strong id="totalCount">0</strong><span>Total tasks</span></div>
+            <div><strong id="hoursTotal">0h</strong><span>Study time logged</span></div>
+            <div><strong id="streak">0 days</strong><span>Current streak*</span></div>
+          </div>
+          <small class="muted">*Streak is based on days you log study time. Data stays in this browser.</small>
+        </article>
+        <article class="focus-card">
+          <div class="focus-heading"><span class="eyebrow">YOUR NEXT STEP</span><span class="spark">✦</span></div>
+          <h3 id="nextTaskTitle">Start with Month 1</h3>
+          <p id="nextTaskText">Complete a task to see your next recommended step here.</p>
+          <button class="primary-btn" id="continueBtn">Continue roadmap <span>→</span></button>
+        </article>
+      </section>
+
+      <section class="section-heading" id="study"><div><span class="eyebrow">CONSISTENCY OVER INTENSITY</span><h2>Study activity</h2></div><span class="section-caption">A realistic target: 10–15 hours/week</span></section>
+      <section class="activity-grid">
+        <article class="panel week-panel"><div class="panel-title"><div><h3>This week</h3><p>Log your sessions and keep your pace.</p></div><span class="week-badge" id="weekHours">0 / 15h</span></div>
+          <div class="week-bars" id="weekBars"></div>
+          <div class="weekly-footer"><span id="weekMessage">Start by logging a study session.</span><div class="week-target"><span></span> Weekly target</div></div>
+        </article>
+        <article class="panel log-panel"><div class="panel-title"><div><h3>Log study time</h3><p>Manual entries, because your laptop can't read your mind. Yet.</p></div></div>
+          <form id="studyForm" class="study-form">
+            <label>Date<input type="date" id="studyDate" required></label>
+            <label>Duration (minutes)<input type="number" id="studyMinutes" min="1" max="1440" placeholder="e.g. 45" required></label>
+            <label>What did you study?<input type="text" id="studyNote" maxlength="120" placeholder="Node event loop, SQL joins..." required></label>
+            <button class="primary-btn" type="submit">Add study session <span>+</span></button>
+          </form>
+        </article>
+      </section>
+
+      <section class="section-heading roadmap-heading" id="roadmap"><div><span class="eyebrow">YOUR 6-MONTH JOURNEY</span><h2>Roadmap modules</h2><p>Check off topics, weekly goals, resources, and deliverables as you complete them.</p></div><div class="filter-wrap"><label for="monthFilter">View</label><select id="monthFilter"><option value="all">All months</option><option value="0">Month 1</option><option value="1">Month 2</option><option value="2">Month 3</option><option value="3">Month 4</option><option value="4">Month 5</option><option value="5">Month 6</option></select></div></section>
+      <div id="roadmapList" class="roadmap-list"></div>
+
+      <section class="section-heading"><div><span class="eyebrow">YOUR RECENT WORK</span><h2>Study history</h2></div><button class="text-btn" id="clearLogBtn">Clear study log</button></section>
+      <section class="panel history-panel"><div id="studyHistory" class="study-history"><p class="empty-state">No sessions logged yet. Your future self is waiting for the first entry.</p></div></section>
+      <footer>BuildPath · Personal progress tracker <span>Progress saved locally on this device</span></footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
