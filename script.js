@@ -1,0 +1,80 @@
+const roadmap = [
+ {month:1,title:"Setup & your first backend",goal:"Go from zero to a working CRUD API that your own frontend can talk to.",color:"#f4b66a",groups:[
+  {name:"Environment setup",tasks:["Install Node.js LTS, VS Code, Git; check node -v and npm -v","Create a GitHub account and push your first repo","Install Postman or Thunder Client","Learn terminal basics: cd, ls, mkdir, running scripts"]},
+  {name:"How the web talks to a server",tasks:["Request/response cycle, URLs, HTTP methods, status codes","JSON, headers, query params vs. route params","What REST means, with a real example"]},
+  {name:"Node & Express basics",tasks:["npm init, package.json, installing packages","Hello-world Express server and a JSON route","GET, POST, PUT, DELETE on an in-memory array","async/await, modules (import/export), .env files"]}],
+  weeks:["W1 setup + Hello server + first routes","W2 full CRUD in memory + Postman","W3 connect your frontend + async/await + .env","W4 mini project + intro to TypeScript"],
+  resources:[["Node.js official Learn","https://nodejs.org/en/learn"],["Express: Hello world","https://expressjs.com/en/starter/hello-world.html"],["freeCodeCamp: Node & Express (YouTube)","https://www.youtube.com/@freecodecamp"]],
+  extra:"Type along with one full Express crash course, then rebuild it from memory without watching.",
+  deliver:"A Patients (or Employees) CRUD API with in-memory data, tested in Postman and wired to your existing frontend."},
+ {month:2,title:"Clean API structure, TypeScript & validation",goal:"Turn your first API into a well-organized, typed and validated one, with small tests from the start.",color:"#65cfae",groups:[
+  {name:"TypeScript for backend",tasks:["Convert your Month 1 API to TypeScript","Interfaces, types, unions, generics basics","strict mode in tsconfig","Run with tsx; ESLint and Prettier"]},
+  {name:"Structure",tasks:["Routes, controller, service, repository layers","Middleware and request lifecycle","REST conventions: pagination, filtering, sorting","Git workflow and meaningful commits"]},
+  {name:"Validation, errors & first tests",tasks:["Zod schemas for body, query and params","Custom AppError and global error middleware","Pino logging and request IDs","First Vitest unit tests for your services"]}],
+  weeks:["W1 TypeScript conversion","W2 layers + middleware","W3 Zod + errors + logging","W4 tests + core API v1"],
+  resources:[["TypeScript Handbook","https://www.typescriptlang.org/docs/handbook/intro.html"],["Zod documentation","https://zod.dev/"],["Vitest guide","https://vitest.dev/guide/"]],
+  extra:"Add Swagger/OpenAPI docs to your API so a frontend dev could use it without asking you questions.",
+  deliver:"Core API v1: people records (users, staff, customers) in TypeScript with layers, Zod validation, consistent errors and unit tests. Still in-memory."},
+ {month:3,title:"PostgreSQL, scheduling & reporting",goal:"Store real data correctly, and build the appointment/booking logic every management system needs.",color:"#7aa9ff",groups:[
+  {name:"PostgreSQL & schema design",tasks:["Install PostgreSQL (or run it with Docker)","Tables, primary/foreign keys, one-to-many, many-to-many","Normalization with a clinic/employee example","Joins, aggregates, GROUP BY, CTEs"]},
+  {name:"ORM & migrations",tasks:["Prisma or Drizzle: schema, relations, queries","Migrations and seed data","Soft deletes, timestamps, UUID vs serial IDs","Connection pooling basics"]},
+  {name:"Scheduling & reports",tasks:["Transactions and isolation levels","Appointments: availability, slots, conflict prevention","Dates and timezones (store UTC)","Search, filtering, pagination and indexes","Dashboard-style aggregate queries (counts, revenue, per-day totals)"]}],
+  weeks:["W1 SQL + schema design","W2 ORM + migrations","W3 appointments + transactions","W4 search/reports + project"],
+  resources:[["PostgreSQL tutorial","https://www.postgresql.org/docs/current/tutorial.html"],["PG Exercises","https://pgexercises.com/"],["Prisma documentation","https://www.prisma.io/docs"]],
+  extra:"Practice SQL on PG Exercises for a few days before touching the ORM.",
+  deliver:"Core API v2 on PostgreSQL with migrations, seed data, an appointments module that rejects double-booking, search/pagination and one summary report endpoint."},
+ {month:4,title:"Authentication, roles, audit logs & security",goal:"Control who can do what, record what happened, and protect your data.",color:"#ed83b2",groups:[
+  {name:"Authentication",tasks:["Password hashing with Argon2 or bcrypt","Register and login","JWT access + refresh token rotation","Password reset and email verification flow"]},
+  {name:"Authorization & auditing",tasks:["Role-based access control (Admin, Staff, Customer/Patient)","Ownership checks: users only see their own records","Auth middleware and guards","Audit log table: who changed what, and when"]},
+  {name:"API security",tasks:["Rate limiting, Helmet, CORS","OWASP Top 10 for APIs, SQL injection, XSS","Secrets management and env validation","Write tests for auth and permission failures"]}],
+  weeks:["W1 hashing + login","W2 JWT + refresh","W3 RBAC + audit log","W4 hardening + tests"],
+  resources:[["OWASP Cheat Sheet Series","https://cheatsheetseries.owasp.org/"],["Helmet documentation","https://helmetjs.github.io/"],["JWT introduction","https://jwt.io/introduction"]],
+  extra:"Try to break your own API: access another user's record, skip login, send bad tokens. Fix every hole you find.",
+  deliver:"Core API v3: secure auth, three roles, ownership checks, audit trail on all create/update/delete actions, rate-limited endpoints, with tests."},
+ {month:5,title:"Testing, files, exports & your first real system",goal:"Prove the core works by shipping it as a clinic reception system.",color:"#b6a0ff",groups:[
+  {name:"Integration testing",tasks:["Supertest against real endpoints","Test database in a container, seed and clean between tests","Test error paths, not just happy paths","Coverage reports with sensible targets"]},
+  {name:"Files & exports",tasks:["File uploads with Multer (documents, photos)","File type and size validation, safe storage","CSV export and a simple PDF report","Pre-commit hooks with lint and tests"]},
+  {name:"Variant 1: Clinic reception",tasks:["Model patients, doctors, appointments, visit notes","Reuse the core: auth, roles, scheduling, audit log","Receptionist role: register patients, book and reschedule","Connect your frontend end to end"]}],
+  weeks:["W1 integration tests","W2 uploads + exports","W3 clinic schema + features","W4 frontend integration + polish"],
+  resources:[["Supertest","https://github.com/ladjs/supertest"],["Multer","https://github.com/expressjs/multer"],["Vitest guide","https://vitest.dev/guide/"]],
+  extra:"Count how much code you reused from the core versus wrote new. That ratio is the whole point.",
+  deliver:"A working clinic reception system: backend plus your frontend, with tests, file uploads and an exportable report."},
+ {month:6,title:"Docker, background jobs, deployment & second system",goal:"Ship it live, add reminders, and prove the pattern works by reskinning it as an employee system.",color:"#65d4df",groups:[
+  {name:"Containers & performance",tasks:["Dockerfile and Docker Compose: API + PostgreSQL + Redis","Health checks and graceful shutdown","Redis caching on a hot endpoint","Basic load test with autocannon or k6"]},
+  {name:"Background jobs & delivery",tasks:["BullMQ jobs: appointment reminder emails","GitHub Actions: lint, test, build, deploy","Deploy to Render, Railway or AWS","Environment config, logging and error monitoring"]},
+  {name:"Variant 2: Employee management",tasks:["Model employees, departments, leave requests, attendance","Roles: Admin, HR, Employee","Reuse the core: auth, audit log, reports","Write a public README with setup and API docs"]}],
+  weeks:["W1 Docker","W2 Redis + BullMQ","W3 CI/CD + deploy","W4 employee system + portfolio polish"],
+  resources:[["Docker Get Started","https://docs.docker.com/get-started/"],["BullMQ docs","https://docs.bullmq.io/"],["GitHub Actions docs","https://docs.github.com/en/actions"]],
+  extra:"Write a short case study: how one core backend powered two different systems.",
+  deliver:"Two live, documented systems (clinic and employee) from one reusable core, with CI pipeline, caching, background jobs and a public README."}
+];
+const stateKey="buildpath_backend_tracker_v2";
+let state=JSON.parse(localStorage.getItem(stateKey)||'{"checks":{},"sessions":[]}');
+const $=s=>document.querySelector(s);
+const weekDays=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+function todayISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+$("#studyDate").value=todayISO();
+function taskId(m,g,t){return `m${m}-g${g}-t${t}`}
+function checked(id){return !!state.checks[id]}
+function save(){localStorage.setItem(stateKey,JSON.stringify(state));$("#saveStatus").textContent="● Saved in this browser"}
+function taskCount(){let n=0;roadmap.forEach((m,mi)=>{m.groups.forEach((g,gi)=>g.tasks.forEach((t,ti)=>n++));m.weeks.forEach((w,i)=>n++);n++});return n}
+function doneCount(){return Object.values(state.checks).filter(Boolean).length}
+function weekStart(date){let d=new Date(date+"T12:00:00");let day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return d}
+function weekDates(){let start=weekStart(todayISO());return weekDays.map((_,i)=>{let d=new Date(start);d.setDate(start.getDate()+i);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`})}
+function totalMinutes(){return state.sessions.reduce((s,x)=>s+Number(x.minutes),0)}
+function streak(){const days=[...new Set(state.sessions.map(s=>s.date))].sort().reverse();if(!days.length)return 0;let d=new Date(todayISO()+"T12:00:00");let current=0;for(let i=0;i<days.length;i++){let expected=new Date(d);expected.setDate(d.getDate()-i);let key=`${expected.getFullYear()}-${String(expected.getMonth()+1).padStart(2,"0")}-${String(expected.getDate()).padStart(2,"0")}`;if(days[i]===key)current++;else break}return current}
+function renderStats(){const total=taskCount(),done=doneCount(),pct=Math.round(done/total*100);$("#overallPercent").textContent=pct+"%";$("#overallBar").style.width=pct+"%";$("#doneCount").textContent=done;$("#totalCount").textContent=total;$("#hoursTotal").textContent=(totalMinutes()/60).toFixed(1)+"h";$("#streak").textContent=streak()+" days";
+roadmap.forEach((m,i)=>{let ids=[];m.groups.forEach((g,gi)=>g.tasks.forEach((t,ti)=>ids.push(taskId(i,gi,ti))));m.weeks.forEach((w,wi)=>ids.push(`m${i}-w${wi}`));ids.push(`m${i}-deliver`);let d=ids.filter(checked).length;let p=Math.round(d/ids.length*100);let el=document.querySelector(`[data-month-progress="${i}"]`);if(el){el.style.width=p+"%";document.querySelector(`[data-month-percent="${i}"]`).textContent=p+"%";document.querySelector(`[data-month-count="${i}"]`).textContent=`${d} of ${ids.length} done`}});let next=document.querySelector(".task input:not(:checked)");if(next){$("#nextTaskTitle").textContent=next.closest("label").innerText.trim();$("#nextTaskText").textContent="Pick up where you left off. Your next unchecked roadmap item is ready."}else{$("#nextTaskTitle").textContent="Roadmap completed";$("#nextTaskText").textContent="All checklist items are complete. Time to build something real."}}
+function renderWeek(){const dates=weekDates();let mins=dates.map(d=>state.sessions.filter(s=>s.date===d).reduce((a,s)=>a+Number(s.minutes),0));$("#weekBars").innerHTML=dates.map((d,i)=>`<div class="day-bar"><div class="bar-rail"><div class="bar-fill" style="height:${Math.min(100,mins[i]/180*100)}%"></div></div><span>${weekDays[i]}</span></div>`).join("");let sum=mins.reduce((a,b)=>a+b,0);$("#weekHours").textContent=`${(sum/60).toFixed(1)} / 15h`;$("#weekMessage").textContent=sum>=900?"Weekly target reached. Nicely done.":`${Math.max(0,Math.round((900-sum)/60))}h left to reach your weekly target.`}
+function renderHistory(){const entries=[...state.sessions].sort((a,b)=>b.date.localeCompare(a.date));$("#studyHistory").innerHTML=entries.length?entries.map(s=>`<div class="history-item"><div class="history-date">${s.date}</div><div class="history-note">${escapeHTML(s.note)}</div><div class="history-duration">${formatDuration(s.minutes)}</div></div>`).join(""):'<p class="empty-state">No sessions logged yet. Your future self is waiting for the first entry.</p>'}
+function formatDuration(m){m=Number(m);return m>=60?`${Math.floor(m/60)}h ${m%60}m`:`${m}m`}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderRoadmap(){let filter=$("#monthFilter").value;$("#roadmapList").innerHTML=roadmap.map((m,mi)=>{if(filter!=="all"&&Number(filter)!==mi)return "";let groups=m.groups.map((g,gi)=>`<div class="topic-group"><h4>${g.name}</h4>${g.tasks.map((t,ti)=>{let id=taskId(mi,gi,ti);return `<label class="task ${checked(id)?"done":""}"><input type="checkbox" data-check="${id}" ${checked(id)?"checked":""}><span>${t}</span></label>`}).join("")}</div>`).join("");let weeks=m.weeks.map((w,wi)=>{let id=`m${mi}-w${wi}`;return `<label class="task ${checked(id)?"done":""}"><input type="checkbox" data-check="${id}" ${checked(id)?"checked":""}><span>${w}</span></label>`}).join("");let resources=m.resources.map(r=>`<div class="resource">↗ <a href="${r[1]}" target="_blank" rel="noopener">${r[0]}</a></div>`).join("");let del=`m${mi}-deliver`;return `<article class="month-card" style="--month-color:${m.color}"><div class="month-header"><div class="month-title-wrap"><div class="month-number">M${m.month}</div><div><h3>${m.title}</h3><p data-month-count="${mi}">0 tasks done</p></div></div><div class="month-percent"><strong data-month-percent="${mi}">0%</strong></div></div><div class="month-body"><div class="progress-track month-progress"><div data-month-progress="${mi}"></div></div><p class="muted">${m.goal}</p><div class="topic-grid">${groups}</div><div class="weekly-plan"><h4>WEEKLY PLAN</h4><div class="weekly-checks">${weeks}</div></div><div class="resources"><h4>BEST RESOURCES</h4><div class="resource-grid">${resources}</div></div><div class="deliverable"><input type="checkbox" data-check="${del}" ${checked(del)?"checked":""}><div><strong>Deliverable:</strong> ${m.deliver}</div></div><div class="deliverable"><span>✦</span><div><strong>Extra project idea:</strong> ${m.extra}</div></div></div></article>`}).join("");renderStats()}
+function render(){renderRoadmap();renderStats();renderWeek();renderHistory()}
+document.addEventListener("change",e=>{if(e.target.matches("[data-check]")){state.checks[e.target.dataset.check]=e.target.checked;save();render()}})
+$("#monthFilter").addEventListener("change",renderRoadmap);
+$("#studyForm").addEventListener("submit",e=>{e.preventDefault();let minutes=Number($("#studyMinutes").value);let date=$("#studyDate").value;let note=$("#studyNote").value.trim();if(!minutes||minutes<1||!date||!note)return;state.sessions.push({id:Date.now(),date,minutes,note});save();$("#studyMinutes").value="";$("#studyNote").value="";renderStats();renderWeek();renderHistory()});
+$("#continueBtn").addEventListener("click",()=>{let n=document.querySelector(".task input:not(:checked)");if(n){n.closest(".month-card")?.scrollIntoView({behavior:"smooth",block:"center"});n.focus()}else $("#roadmap").scrollIntoView({behavior:"smooth"})});
+$("#exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),roadmap,progress:state},null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="backend-roadmap-progress.json";a.click();URL.revokeObjectURL(url)});
+$("#clearLogBtn").addEventListener("click",()=>{if(confirm("Clear all logged study sessions? Your roadmap checkboxes will stay saved.")){state.sessions=[];save();renderStats();renderWeek();renderHistory()}});
+render();
